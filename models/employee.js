@@ -1,15 +1,18 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var Customer = sequelize.define('Customer', {
-      CustomerId: {
+  var Employee = sequelize.define('Employee', {
+      EmployeeId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-      FirstName: DataTypes.STRING,
       LastName: DataTypes.STRING,
-      Company: DataTypes.STRING,
+      FirstName: DataTypes.STRING,
+      Title: DataTypes.STRING,
+      ReportsTo: DataTypes.INTEGER,
+      BirthDate: DataTypes.DATE,
+      HireDate: DataTypes.DATE,
       Address: DataTypes.STRING,
       City: DataTypes.STRING,
       State: DataTypes.STRING,
@@ -17,23 +20,23 @@ module.exports = function(sequelize, DataTypes) {
       PostalCode: DataTypes.STRING,
       Phone: DataTypes.STRING,
       Fax: DataTypes.STRING,
-      Email: DataTypes.STRING,
-      SupportRepId: DataTypes.INTEGER
+      Email: DataTypes.STRING
     }, {
-      tableName: 'Customer',
+      tableName: 'Employee',
       timestamps: false,
       classMethods: {
         associate: function(models) {
-          Customer.hasMany(models.Invoice, {
-            foreignKey: 'CustomerId'
-          });
-          Customer.belongsTo(models.Employee, {
+          Employee.hasMany(models.Customer, {
             foreignKey: 'SupportRepId'
           });
+          Employee.belongsTo(models.Employee, {
+            as: 'Boss',
+            foreignKey: 'ReportsTo'
+          })
 
         }
       }
   });
 
-  return Customer;
+  return Employee;
 };
