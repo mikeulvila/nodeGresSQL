@@ -32,6 +32,17 @@ app.get('/playlist', (req, res) => {
     .then(playlists => res.send(playlists));
 });
 
+app.get('/albums', (req, res) => {
+  models.Album.findAll({
+      attributes: { exclude: ['ArtistId'] },
+      include: {
+        model: models.Artist,
+        attributes: { exclude: ['ArtistId'] }
+      }
+    })
+    .then(albums => res.send(albums));
+});
+
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
