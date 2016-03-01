@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon app.js",
+    "serve": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "node server.js",
     "postinstall": "bower install"
   },
   "repository": {
