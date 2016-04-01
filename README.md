@@ -1,1 +1,2 @@
 # nodeGresSQL
+Playground for PostgreSQL.
